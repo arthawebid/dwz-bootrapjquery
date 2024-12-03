@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan jQuery 03</title>
+</head>
+<body>
+    
+    <h3>Hitung Luas Persegi</h3>
+    <div>
+        Panjang<input type="text" id="txPANJANG">
+    </div>
+    <div>
+        Lebar<input type="text" id="txLEBAR">
+    </div>
+    <div>
+        <p class="txHASIL">hasil</p>
+    </div>
+    <div>
+        <button id="cmdHITUNG">Hitung Luas</button>
+    </div>
+    
+
+
+    <script src="../jquery/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#cmdHITUNG").on("click",function(){
+                let pj = $("#txPANJANG").val()
+                let lb = $("#txLEBAR").val()
+                let luas = pj*lb
+                let info = "Hitung Luas Persegi<br>Panjang: "+pj+"<br>lebar: "+lb+"<br>"
+                info += "Luas = Panjang X Lebar<br>Luas = "+pj+ " X "+ lb +"<br>"
+                info += "Luas = " + luas
+                $(".txHASIL").html(info)
+            })
+        })
+    </script>
+    <!--https://github.com/arthawebid/dwz-bootrapjquery/-->
+</body>
+</html>
