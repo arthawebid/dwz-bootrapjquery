@@ -65,7 +65,9 @@
                     txHASIL = "<h3>Konversi Nilai Celcius ke Fahrenheit</h3>"
                     txHASIL +="°F = (°C X 9/5) + 32<br>"
                     txHASIL +="°F = ("+nC+" X 9/5) + 32<br>"
-                    txHASIL +="°F = "+nF
+                    txHASIL +="°F = "+nF+"°"
+                    $("#txF").val(nF)
+                    $("#txHasil").html(txHASIL)
                 }
             })
         })
