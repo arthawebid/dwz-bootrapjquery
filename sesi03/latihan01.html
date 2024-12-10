@@ -43,7 +43,11 @@
         //Dari F-> = (F × 5/9) - 32
         $(function(){
             $("select").on('change',function(){
-                cosole.log($("select").val())
+                let pil = $("select").val()
+                if(pil=="ctof"){
+                    $("#txC").prop("disabled",false)
+                    $("#txF").prop("disabled",true)
+                }
             })
         })
     </script>
