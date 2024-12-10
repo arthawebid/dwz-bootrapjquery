@@ -28,7 +28,9 @@
             <label class="form-label">Nilai Fahrenheit</label>
             <input type="text" id="txF" class="form-control">
         </div>
-
+        <div class="jarak">
+            <span id="txHasil"></span>
+        </div>
         <div class="jarak">
             <button id="cmdConvert" class="btn btn-warning">Konversi Nilai</button>
         </div>
@@ -42,14 +44,28 @@
         //Dari C->F = (C × 9/5) + 32
         //Dari F-> = (F × 5/9) - 32
         $(function(){
+            var pil=""
+            var txHASIL = ""
             $("select").on('change',function(){
-                let pil = $("select").val()
+                pil = $("select").val()
                 if(pil=="ctof"){
                     $("#txC").prop("disabled",false)
                     $("#txF").prop("disabled",true)
                 }else{
                     $("#txC").prop("disabled",true)
                     $("#txF").prop("disabled",false)
+                }
+            })
+            $("#cmdConvert").on("click",function(){
+                let nC = 0
+                let nF = 0
+                if(pil=="ctof"){
+                    nC = $("#txC").val()
+                    nF = (nC*9/5)+32
+                    txHASIL = "<h3>Konversi Nilai Celcius ke Fahrenheit</h3>"
+                    txHASIL +="°F = (°C X 9/5) + 32<br>"
+                    txHASIL +="°F = ("+nC+" X 9/5) + 32<br>"
+                    txHASIL +="°F = "+nF
                 }
             })
         })
