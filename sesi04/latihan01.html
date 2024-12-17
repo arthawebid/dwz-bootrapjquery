@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Ajax Get Data</title>
+</head>
+<body>
+    
+   <script src="../jquery/jquery-3.7.1.min.js"></script> 
+   <script>
+    $(function(){
+        var NIM = "2401010714"
+        var urlAPI = "https://apimhstiki.ptov.my.id"
+        var urlAPIslideshow = urlAPI+"/slideshow/"+NIM
+
+        $.ajax({
+            url: urlAPIslideshow,
+            method: 'GET',
+            dataType: 'json',
+            success:function(dta){
+                console.log(dta.nama)
+            },
+            error:function(xhr,txstt,ercode){
+                console.error("Load data -> gagal")
+            }
+        })
+
+    })
+   </script>
+</body>
+</html>
