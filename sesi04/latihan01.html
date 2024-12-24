@@ -37,7 +37,23 @@
                     <a href="#project" class="btn btn-warning">Cek Project</a>
                 </div>
             </div>
-            <div class="col"></div>
+            <div class="col">
+
+                <div id="carouselExample" class="carousel slide">
+                    
+                    <div class="carousel-inner bingkaislideshow" id="slider"></div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+
+            </div>
         </div>
 
         <footer style="clear: both;">
@@ -64,6 +80,14 @@
                 $("#judul").html(dta.judul)
                 $("#konten").html(dta.deskripsi)
                 $("#nama").html(dta.nama)
+                let SS = ""
+                dta.images.forEach(function(gambar,idx){
+                    let aktif = idx===0 ? " active":""
+                    SS += `<div class="carousel-item${aktif}">
+                        <img src="${gambar.url}" class="d-block w-100" alt="${gambar.alt}">
+                      </div>`
+                })
+                $("#slider").html(SS)
             },
             error:function(xhr,txstt,ercode){
                 console.error("Load data -> gagal")
