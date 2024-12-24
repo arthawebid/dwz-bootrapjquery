@@ -23,6 +23,14 @@
         .bingkaislideshow{
             border-radius: 20px 0px;
         }
+        .produkitem{
+            height: 200px;
+            text-align: center;
+            object-fit: cover;
+        }
+        .card-title{
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
@@ -55,13 +63,24 @@
 
             </div>
         </div>
+    </div>
+    
+    <div class="container">
+        <span class="text-mute" style="clear:both"></span>
+        <div class="row">
+            <a name="project"></a>
+            <div class="produklist">
+            </div>
+        </div>
+    </div>
 
+    <div class="container">
         <footer style="clear: both;">
             <a href="#">back to top</a>
             <p>Copyright 2024 &copy; WebDesain by <span id="nama"></span></p>
         </footer>
-
     </div>
+
 
 
     
@@ -69,8 +88,10 @@
    <script>
     $(function(){
         var NIM = "2401010714"
-        var urlAPI = "https://apimhstiki.ptov.my.id"
-        var urlAPIslideshow = urlAPI+"/slideshow/"+NIM
+        var urlAPI = "https://apimhstiki.ptov.my.id/"
+        var urlAPIslideshow = urlAPI+"slideshow/"+NIM
+        var urlProdukList = urlAPI+NIM+"/produk/list"
+        //console.log(urlProdukList)
 
         $.ajax({
             url: urlAPIslideshow,
@@ -88,6 +109,34 @@
                       </div>`
                 })
                 $("#slider").html(SS)
+            },
+            error:function(xhr,txstt,ercode){
+                console.error("Load data -> gagal")
+            }
+        })
+
+        $.ajax({
+            url:urlProdukList,
+            method: 'GET',
+            dataType: 'json',
+            success:function(dta){
+                let kartu = ""
+                if(dta.error == 0 ){
+                    dta.produk.forEach(function(prd){
+                        kartu += `<div class="card" style="width: 15.5rem; float:left; margin: 15px;">
+                        <img src="${prd.IMG}" class="card-img-top produkitem" alt="${prd.ITEM}">
+                        <div class="card-body">
+                          <h5 class="card-title">${prd.ITEM}</h5>
+                          <p class="card-text">Rp. ${prd.HRGJUAL},-</p>
+                          <a href="#" class="btn btn-warning">Detail</a>
+                          <a href="#" class="btn btn-primary">Order</a>
+                        </div>
+                    </div>`
+                    })
+                    $(".produklist").html(kartu)
+                }else{
+                    console.log("Gagal load data produk")
+                }
             },
             error:function(xhr,txstt,ercode){
                 console.error("Load data -> gagal")
