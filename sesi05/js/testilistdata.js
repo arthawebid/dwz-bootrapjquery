@@ -3,6 +3,9 @@ var urlAPI = "https://apimhstiki.ptov.my.id/"
 var urlLIST = urlAPI+"/testi-"+NIM+"/read"
 var urlDEL = `${urlAPI}/testi`
 
+$("#infsukses").hide()
+$("#infgagal").hide()
+
 $(function(){
     listdata()
 })
@@ -34,5 +37,26 @@ function listdata(){
     })
 }
 function destroy(idx){
-    alert("Hapus Data dengan id: "+idx)
+    $.ajax({
+        url: urlDEL,
+        method: 'POST',
+        data: 'ACT=destroy&NIM='+NIM+'&IDX='+idx,
+        dataType: 'json',
+        success: function(dta){
+            console.log(dta)
+            if(dta.error == 0 ){
+                $("#infsukses").show()
+                $("#infsukses").html("Data Testimoni berhasil di hapus")
+            }else{
+                $("#infgagal").show()
+            }
+            setTimeout(function(){
+                window.location.reload(1)
+            },3000)
+        },
+        error: function(){
+            console.log("terjadi masalah saat hapus data")
+        }
+
+    })
 }
